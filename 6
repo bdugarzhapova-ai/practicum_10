@@ -1,0 +1,8 @@
+def check_message(message):
+    if len(message) <= 160:
+        return message
+    else:
+        return message[:160]
+
+msg = input("Введите сообщение: ")
+print(check_message(msg))
