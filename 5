@@ -1,0 +1,23 @@
+def get_card_value():
+    price = int(input("Введите стоимость карты (5, 10, 25, 50, 100): "))
+
+    if price == 5 or price == 10:
+        bonus = 0
+    elif price == 25:
+        bonus = 3
+    elif price == 50:
+        bonus = 8
+    elif price == 100:
+        bonus = 20
+    else:
+        print("Ошибка, допустимые значения: 5, 10, 25, 50, 100")
+        return None
+
+    total = price + bonus
+    print(f"Стоимость карты: ${price}")
+    print(f"Бонус: ${bonus}")
+    print(f"Итого: ${total}")
+    return total
+
+
+get_card_value()
