@@ -1,0 +1,22 @@
+def counter(sentence):
+    sentence = sentence.lower()
+    count_vowels = 0
+    count_consonants = 0
+    vowels = ["а", "е", "и", "о", "у", "ы", "э", "ю", "я", "ё"]
+    consonants = [
+        "ж", "з", "б", "в", "г", "д", "й", "к", "л", "м",
+        "н", "п", "р", "с", "т", "ф", "х", "ц", "ч", "ш",
+        "щ", "ь", "ъ"
+    ]
+
+    for char in sentence:
+        if char in vowels:
+            count_vowels += 1
+        elif char in consonants:
+            count_consonants += 1
+
+    print(count_vowels, count_consonants)
+
+
+sentence = " Привет, есть хочу awful"
+counter(sentence)
