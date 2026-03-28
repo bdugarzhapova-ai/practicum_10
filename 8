@@ -1,0 +1,55 @@
+def convert_datetime(date_str):
+    try:
+        date_part, time_part = date_str.split()
+
+        month, day, year = date_part.split('/')
+
+        month = int(month)
+        if month < 1 or month > 12:
+            print("Ошибка: месяц должен быть от 1 до 12")
+            return
+
+        day = int(day)
+        if day < 1 or day > 31:
+            print("Ошибка: день должен быть от 1 до 31")
+            return
+
+        hour, minute, sec = time_part.split(':')
+
+        hour = int(hour)
+        if hour < 0 or hour > 23:
+            print("Ошибка: часы должны быть от 0 до 23")
+            return
+
+        minute = int(minute)
+        if minute < 0 or minute > 59:
+            print("Ошибка: минуты должны быть от 0 до 59")
+            return
+
+        sec = int(sec)
+        if sec < 0 or sec > 59:
+            print("Ошибка: секунды должны быть от 0 до 59")
+            return
+
+        year_short = year[-2:]
+
+        if hour == 0:
+            hour_12 = 12
+            ampm = "AM"
+        elif hour < 12:
+            hour_12 = hour
+            ampm = "AM"
+        elif hour == 12:
+            hour_12 = 12
+            ampm = "PM"
+        else:
+            hour_12 = hour - 12
+            ampm = "PM"
+
+        print(f"{day:02d}.{month:02d}.{year_short} {hour_12:02d}:{minute:02d}:{sec:02d} {ampm}")
+
+    except:
+        print("Ошибка: неверный формат данных")
+
+
+convert_datetime("12/04/1990 13:12:12")
