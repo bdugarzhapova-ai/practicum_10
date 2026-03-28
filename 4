@@ -1,0 +1,14 @@
+def make_payment(P):
+    credit_limit = 1000
+    min_payment = 20
+
+    if int(P) >= min_payment and int(P) <= credit_limit:
+        print("Успех")
+    else:
+        print("Повторить попытку")
+
+    return f"Оплата: {P}"
+
+
+P = input("Введите сумму оплаты: ")
+print(make_payment(P))
