@@ -1,73 +1,83 @@
-import turtle
-import random
+import turtle  # Библиотека для рисования
+import random  # Библиотека для случайного выбора цветов
 
+# Настройки экрана
 screen = turtle.Screen()
-screen.bgcolor("black")
-screen.title("Цветной геометрический орнамент")
-screen.setup(600, 600)
+screen.bgcolor("black")  # Чёрный фон
+screen.title("Цветной геометрический орнамент")  # Заголовок окна
+screen.setup(600, 600)  # Размер окна 600x600 пикселей
 
+# Настройки рисователя (черепашки)
 pen = turtle.Turtle()
-pen.speed(0)
-pen.pensize(2)
+pen.speed(0)  # Максимальная скорость рисования
+pen.pensize(2)  # Толщина линии 2 пикселя
 
+# Список доступных цветов
 colors = ["red", "orange", "yellow", "green", "blue", "purple", "pink", "cyan"]
 
 
 def draw_square(x, y, size, color):
-    """Draw a filled square at the given coordinates."""
-    pen.penup()
-    pen.goto(x, y)
-    pen.setheading(0)
-    pen.pendown()
-    pen.fillcolor(color)
-    pen.begin_fill()
-    for _ in range(4):
-        pen.forward(size)
-        pen.left(90)
-    pen.end_fill()
+    """Рисует квадрат в указанной позиции с заданным размером и цветом."""
+    pen.penup()           # Поднимаем перо (не рисуем при перемещении)
+    pen.goto(x, y)        # Перемещаемся в точку (x, y)
+    pen.setheading(0)     # Смотрим направо (0 градусов)
+    pen.pendown()         # Опускаем перо (начинаем рисовать)
+    pen.fillcolor(color)  # Задаём цвет заливки
+    pen.begin_fill()      # Начинаем заливку
+    for _ in range(4):    # Рисуем 4 стороны квадрата
+        pen.forward(size) # Двигаемся вперёд на size
+        pen.left(90)      # Поворачиваем налево на 90 градусов
+    pen.end_fill()        # Заканчиваем заливку
 
 
 def draw_circle(x, y, radius, color):
-    """Draw a filled circle at the given coordinates."""
+    """Рисует круг в указанной позиции с заданным радиусом и цветом."""
     pen.penup()
-    pen.goto(x, y - radius)
+    pen.goto(x, y - radius)  # Центр круга будет в точке (x, y)
     pen.setheading(0)
     pen.pendown()
     pen.fillcolor(color)
     pen.begin_fill()
-    pen.circle(radius)
+    pen.circle(radius)       # Рисуем круг радиусом radius
     pen.end_fill()
 
 
 def draw_triangle(x, y, size, color):
-    """Draw a filled triangle at the given coordinates."""
+    """Рисует треугольник в указанной позиции с заданным размером и цветом."""
     pen.penup()
     pen.goto(x, y)
-    pen.setheading(60)
+    pen.setheading(60)       # Поворачиваем на 60 градусов
     pen.pendown()
     pen.fillcolor(color)
     pen.begin_fill()
-    for _ in range(3):
-        pen.forward(size)
-        pen.right(120)
+    for _ in range(3):       # Рисуем 3 стороны треугольника
+        pen.forward(size)    # Двигаемся вперёд на size
+        pen.right(120)       # Поворачиваем направо на 120 градусов
     pen.end_fill()
 
 
 def draw_ornament():
-    """Draw the main ornament pattern."""
+    """Рисует орнамент из случайных геометрических фигур."""
+    
+    # Создаём список позиций (сетка 7x7 с шагом 50 пикселей)
     positions = []
-    for x in range(-150, 160, 50):
+    for x in range(-150, 160, 50):  # От -150 до 150 с шагом 50
         for y in range(-150, 160, 50):
             positions.append((x, y))
-
+    
+    # Рисуем фигуру в каждой позиции
     for (x, y) in positions:
-        color = random.choice(colors)
-
+        color = random.choice(colors)  # Случайный цвет
+        
+        # Выбираем фигуру в зависимости от координат
         if (x + y) % 100 == 0:
+            # Если сумма координат делится на 100 - рисуем круг
             draw_circle(x, y, 15, color)
         elif x % 100 == 0 or y % 100 == 0:
+            # Если x или y делятся на 100 - рисуем квадрат
             draw_square(x - 15, y - 15, 30, color)
         else:
+            # Во всех остальных случаях - рисуем треугольник
             pen.penup()
             pen.goto(x, y - 15)
             pen.pendown()
@@ -77,6 +87,7 @@ def draw_ornament():
             pen.end_fill()
 
 
+# Запускаем рисование орнамента
 draw_ornament()
-pen.hideturtle()
-screen.mainloop()
+pen.hideturtle()  # Прячем черепашку
+screen.mainloop()  # Держим окно открытым
