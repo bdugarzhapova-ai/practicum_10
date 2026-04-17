@@ -1,55 +1,70 @@
 def convert_datetime(date_str):
+    """Преобразует дату из формата MM/DD/YYYY HH:MM:SS в DD.MM.YY HH:MM:SS AM/PM."""
+    
     try:
+        # Разделяем строку на дату и время
         date_part, time_part = date_str.split()
-
+        
+        # Разбираем дату (месяц/день/год)
         month, day, year = date_part.split('/')
-
+        
+        # Проверяем месяц (1-12)
         month = int(month)
         if month < 1 or month > 12:
             print("Ошибка: месяц должен быть от 1 до 12")
             return
-
+        
+        # Проверяем день (1-31)
         day = int(day)
         if day < 1 or day > 31:
             print("Ошибка: день должен быть от 1 до 31")
             return
-
+        
+        # Разбираем время (часы:минуты:секунды)
         hour, minute, sec = time_part.split(':')
-
+        
+        # Проверяем часы (0-23)
         hour = int(hour)
         if hour < 0 or hour > 23:
             print("Ошибка: часы должны быть от 0 до 23")
             return
-
+        
+        # Проверяем минуты (0-59)
         minute = int(minute)
         if minute < 0 or minute > 59:
             print("Ошибка: минуты должны быть от 0 до 59")
             return
-
+        
+        # Проверяем секунды (0-59)
         sec = int(sec)
         if sec < 0 or sec > 59:
             print("Ошибка: секунды должны быть от 0 до 59")
             return
-
+        
+        # Берём последние 2 цифры года
         year_short = year[-2:]
-
-        if hour == 0:
+        
+        # Конвертируем 24-часовой формат в 12-часовой с AM/PM
+        if hour == 0:           # Полночь (00:00)
             hour_12 = 12
             ampm = "AM"
-        elif hour < 12:
+        elif hour < 12:         # До полудня (01:00 - 11:00)
             hour_12 = hour
             ampm = "AM"
-        elif hour == 12:
+        elif hour == 12:        # Полдень (12:00)
             hour_12 = 12
             ampm = "PM"
-        else:
+        else:                   # После полудня (13:00 - 23:00)
             hour_12 = hour - 12
             ampm = "PM"
-
+        
+        # Выводим результат в новом формате
         print(f"{day:02d}.{month:02d}.{year_short} {hour_12:02d}:{minute:02d}:{sec:02d} {ampm}")
-
+    
     except:
+        # Если что-то пошло не так (например, неправильный формат)
         print("Ошибка: неверный формат данных")
 
 
+# Пример вызова функции
 convert_datetime("12/04/1990 13:12:12")
